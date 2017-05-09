@@ -44,6 +44,17 @@ func (vs *ViewSet) PostListView(ps []*entity.Post, nextPosts []*entity.Post, pre
 	}
 }
 
+func (vs *ViewSet) AdminView(ps []*entity.Post) *View {
+	return &View{
+		vs.urlBuilder,
+		vs.config,
+		"admin.tmpl",
+		map[string]interface{}{
+			"posts": ps,
+		},
+	}
+}
+
 func (vs *ViewSet) PostEditorView(p *entity.Post) *View {
 	return &View{
 		vs.urlBuilder,

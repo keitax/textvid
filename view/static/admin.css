@@ -1,5 +1,9 @@
 @import "./index.css";
 
+.post-table {
+
+}
+
 .post-editor__title {
     font-size: large;
 }

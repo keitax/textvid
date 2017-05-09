@@ -1,0 +1,14 @@
+{{define "stylesheets" -}}
+<link rel="stylesheet" href="static/admin.css">
+{{end -}}
+
+{{define "content" -}}
+<table class="post-table">
+{{range .posts -}}
+<tr>
+<td>{{.Title}}</td>
+<td>{{.CreatedAt | ShowTime}}</td>
+</tr>
+{{end -}}
+</table>
+{{end -}}

@@ -20,9 +20,12 @@ func New(config *config.Config) (http.Handler, error) {
 		return nil, err
 	}
 
+	d := dao.NewPostDao(conn, config)
+
 	ub := util.NewUrlBuilder(config)
 	vs := view.NewViewSet(ub, config)
-	pc := controller.NewPostController(dao.NewPostDao(conn, config), vs, ub, config)
+	pc := controller.NewPostController(d, vs, ub, config)
+	ac := controller.NewAdminController(d, vs, config)
 
 	router := mux.NewRouter()
 	router.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir(config.StaticDir))))
@@ -31,6 +34,7 @@ func New(config *config.Config) (http.Handler, error) {
 	router.HandleFunc("/posts/", pc.GetList)
 	router.HandleFunc("/posts/{id:[0-9]+}", pc.EditPost)
 	router.HandleFunc("/", pc.GetIndex)
+	router.HandleFunc("/admin", ac.GetIndex)
 
 	return router, nil
 }
