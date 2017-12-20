@@ -1,3 +1,6 @@
 [submodule "tv-fe"]
 	path = tv-fe
 	url = https://github.com/keitax/tv-fe.git
+[submodule "tv-api"]
+	path = tv-api
+	url = https://github.com/keitax/tv-api.git
